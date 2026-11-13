@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="barroco">
+<html lang="pt-BR" data-theme="renascentista">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,7 +9,7 @@
 <title>Provador — boné e óculos pro seu rosto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,wght@1,600&family=Cinzel:wght@600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Saira+Extra+Condensed:wght@800&family=Bodoni+Moda:ital,wght@1,600&family=Cinzel:wght@600&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
 <style>:root{
   --breu:#0d0a07; --breu-2:#17120c; --osso:#EDE4D3; --osso-2:#B9AE9A; --ouro:#C9A15A; --ouro-2:#8E6B2E; --vinho:#6E1B1B; --ok:#4FA36B; --erro:#D0453A;
   --safe-b:env(safe-area-inset-bottom); --safe-t:env(safe-area-inset-top);
@@ -209,6 +209,8 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
 
 :root,[data-theme="barroco"]{--breu:#0d0a07;--breu-2:#17120c;--osso:#EDE4D3;--osso-2:#B9AE9A;--ouro:#C9A15A;--ouro-2:#8E6B2E;--vinho:#6E1B1B;--frame:#1e160d;--glow:#2a1d10;
   --acc-rgb:201,161,90;--bg-rgb:13,10,7;--txt-rgb:237,228,211;--btn-a:#d9b56c;--btn-b:#a9813d;--btn-t:#140f08;--pf:saturate(.85) contrast(1.08)}
+[data-theme="streetwear"]{--breu:#0c0d0f;--breu-2:#17191c;--osso:#F2F3F5;--osso-2:#8D939B;--ouro:#2F6BFF;--ouro-2:#9AA1AA;--vinho:#2F6BFF;--frame:#000;--glow:#14181f;
+  --acc-rgb:47,107,255;--bg-rgb:12,13,15;--txt-rgb:242,243,245;--btn-a:#ffffff;--btn-b:#dfe2e6;--btn-t:#0c0d0f;--pf:grayscale(.25) contrast(1.06)}
 [data-theme="gotico"]{--breu:#0b0a0e;--breu-2:#15131a;--osso:#E4DFD4;--osso-2:#9C96A3;--ouro:#B32D35;--ouro-2:#5c161b;--vinho:#B32D35;--frame:#050407;--glow:#1d1824;
   --acc-rgb:179,45,53;--bg-rgb:11,10,14;--txt-rgb:228,223,212;--btn-a:#c63a42;--btn-b:#8a1f26;--btn-t:#F4EFE6;--pf:saturate(.75) contrast(1.05);}
 [data-theme="renascentista"]{--breu:#EFE6D2;--breu-2:#F8F2E4;--osso:#2B1D12;--osso-2:#6B5640;--ouro:#1F4E8C;--ouro-2:#B08D57;--vinho:#9E3B22;--frame:#d9c9a3;--glow:#fbf5e8;
@@ -217,12 +219,20 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
 .cam,.try-ui,.scan{--osso:#F3F1EC;--osso-2:#C9C4BA;--txt-rgb:243,241,236;--breu:#0b0b0b;--breu-2:#161616;--bg-rgb:11,11,11}
 /* ===== Fonte de cada tema ===== */
 :root,[data-theme="barroco"]{--bl:"Bodoni Moda",Didot,serif}
-:root :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b,.trow b),[data-theme="barroco"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b,.trow b){font-weight:600;font-style:italic}
+:root :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b),[data-theme="barroco"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b){font-weight:600;font-style:italic}
 [data-theme="renascentista"]{--bl:Cinzel,"Trajan Pro",serif}
-[data-theme="renascentista"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b,.trow b){font-weight:600;font-style:normal;text-transform:uppercase;letter-spacing:.04em}
+[data-theme="renascentista"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b){font-weight:600;font-style:normal;text-transform:uppercase;letter-spacing:.04em}
 [data-theme="renascentista"] .hero h1,[data-theme="renascentista"] .card-hero .shape-name{font-size:clamp(44px,12.5vw,80px)}
+[data-theme="streetwear"]{--bl:"Saira Extra Condensed",Archivo,sans-serif}
+[data-theme="streetwear"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b){font-weight:800;font-style:normal;text-transform:uppercase;letter-spacing:.005em;line-height:.9}
+[data-theme="streetwear"] .hero h1,[data-theme="streetwear"] .card-hero .shape-name{font-size:clamp(68px,20vw,124px)}
+[data-theme="streetwear"] .hero h1 em{color:var(--osso);font-stretch:62%}
+[data-theme="streetwear"] .frame,[data-theme="streetwear"] .card-hero img,[data-theme="streetwear"] .pick.top,[data-theme="streetwear"] .scan canvas{outline:0;box-shadow:none;border:1px solid rgba(var(--txt-rgb),.35)}
+[data-theme="streetwear"] .pick{border-color:rgba(var(--txt-rgb),.14)}
+[data-theme="streetwear"] .price b,[data-theme="streetwear"] .brand a{color:var(--osso)}
+[data-theme="streetwear"] .brand a{background:var(--ouro);color:#fff}
 [data-theme="gotico"]{--bl:"UnifrakturMaguntia","Old English Text MT",serif}
-[data-theme="gotico"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b,.trow b){font-weight:400;font-style:normal}
+[data-theme="gotico"] :is(h2,.logo,.hero h1,.instr,.scan p,.card-hero .shape-name,.pick .rank,.steps b,.hist-item b){font-weight:400;font-style:normal}
 /* ===== Menu de personalização ===== */
 .theme-btn{display:flex;align-items:center;gap:8px;padding:10px 12px;font-size:11px;background:rgba(var(--bg-rgb),.6);color:var(--ouro);border:1px solid var(--ouro);box-shadow:none}
 .theme-btn svg{width:16px;height:16px}
@@ -244,6 +254,30 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
 /* sem selos decorativos */
 .cert{position:static;width:auto;height:auto;border-radius:0;background:none;transform:none;box-shadow:none;padding:0;display:block;text-align:left;margin:-4px 0 6px;font:700 11px/1.3 var(--sans);font-stretch:118%;letter-spacing:.18em;color:var(--ouro)}
 .seal{display:none}
+
+/* ===== Streetwear: tela inicial como capa de disco ===== */
+.vol,.side{display:none}
+[data-theme="streetwear"]{--cv:min(76vw,500px);--ct:calc(78px + var(--safe-t))}
+[data-theme="streetwear"] .hero{min-height:0;padding-top:calc(var(--ct) + var(--cv) + 30px)}
+[data-theme="streetwear"] .hero::before{inset:auto;top:var(--ct);left:16px;width:var(--cv);height:var(--cv);z-index:-1;
+  background:var(--p1) center 30%/cover no-repeat,#1c1d20;filter:grayscale(1) contrast(1.3) brightness(.92);box-shadow:0 30px 60px rgba(0,0,0,.65)}
+[data-theme="streetwear"] .hero::after{inset:auto;top:calc(var(--ct) + var(--cv)*.04);left:calc(16px + var(--cv)*.56);width:calc(var(--cv)*.92);height:calc(var(--cv)*.92);border-radius:50%;z-index:-2;
+  background:radial-gradient(circle,#e9eaec 0 3%,#0c0d0f 3.4% 4%,var(--ouro) 4.4% 16%,#0c0d0f 16.4% 17.5%,transparent 18%),
+    repeating-radial-gradient(circle,#08090a 0 1.5px,#1b1c1f 1.5px 3px);box-shadow:0 20px 40px rgba(0,0,0,.6)}
+[data-theme="streetwear"] .vol{display:flex;justify-content:space-between;align-items:flex-start;position:absolute;top:calc(var(--ct) + 14px);left:30px;width:calc(var(--cv) - 28px);
+  font:800 13px/1 "Saira Extra Condensed",Archivo,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fff;mix-blend-mode:difference}
+[data-theme="streetwear"] .vol b{font-size:30px;letter-spacing:.02em;line-height:.9}
+[data-theme="streetwear"] .side{display:block;margin:0 20px 10px;font:800 13px/1 "Saira Extra Condensed",Archivo,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--osso-2)}
+[data-theme="streetwear"] .steps li{grid-template-columns:44px 1fr}
+[data-theme="streetwear"] .steps b{font-size:26px;color:var(--osso-2)}
+
+.hlfix{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start;margin-top:16px;padding:14px;border:1px solid rgba(var(--acc-rgb),.45);background:var(--breu-2)}
+.hlfix:not(:has(canvas)){grid-template-columns:1fr}
+.hlfix canvas{width:120px;height:auto;display:block}
+.hlfix label{display:block;font-size:15px;margin-bottom:8px}
+.hlfix input{width:100%;accent-color:var(--ouro);margin:4px 0 8px}
+
+#themeBtn{display:none}
 </style>
 </head>
 <body>
@@ -252,6 +286,7 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
 
   <section id="intro">
     <div class="hero">
+      <div class="vol" aria-hidden="true"><b>Provador</b><span>Vol. 01</span></div>
       <div class="label">Visagismo por IA</div>
       <h1>O rosto manda<em>no boné e nos óculos</em></h1>
       <p class="lead">A câmera mede seu rosto como a validação facial do banco, indica os modelos certos com preço e você prova em 3D antes de comprar.</p>
@@ -261,6 +296,7 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
       <svg viewBox="0 0 100 130" fill="none" stroke="#000" stroke-width="3.2" stroke-linecap="round"><path d="M50 10C76 10 86 36 86 62C86 96 70 120 50 120C30 120 14 96 14 62C14 36 24 10 50 10Z"/><path d="M34 56h8M58 56h8M50 62v16M42 92c5 4 11 4 16 0"/></svg>
       <i class="scanline"></i>
     </div>
+    <span class="side">Lado A</span>
     <ol class="steps">
       <li><b>01</b>Encaixe o rosto no quadro, sem boné nem óculos</li>
       <li><b>02</b>Frente, lados e uma piscada</li>
@@ -280,7 +316,7 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
 
   <section id="result" hidden></section>
   <p class="fine">Tudo é processado no seu aparelho: nenhuma imagem vai para servidores. Preços são faixas de referência de nov/2026 e mudam nas lojas.</p>
-  <p class="credits">Obras em domínio público, via Wikimedia Commons. Barroco: <i>O trapaceiro com o ás de ouros</i>, Georges de La Tour; <i>Os trapaceiros</i>, Gerard van Honthorst; <i>Os trapaceiros</i>, Caravaggio. Renascentista: <i>A Escola de Atenas</i>, Rafael; <i>O Nascimento de Vênus</i>, Botticelli; <i>Melencolia I</i>, Albrecht Dürer. Gótico: <i>Abadia no carvalhal</i>, <i>O cemitério</i> e <i>O monge à beira-mar</i>, Caspar David Friedrich.</p>
+  <p class="credits">Obras em domínio público, via Wikimedia Commons: <i>A Escola de Atenas</i>, Rafael; <i>O Nascimento de Vênus</i>, Botticelli; <i>Melencolia I</i>, Albrecht Dürer.</p>
 </main>
 
 <div class="actionbar" id="actionbar" hidden>
@@ -349,7 +385,7 @@ section.cat>p{margin:18px 0 20px;max-width:56ch;color:var(--osso-2)}
   </div>
 </div>
 
-<script>try{const t=localStorage.getItem("provador.theme");if(["barroco","renascentista","gotico"].includes(t))document.documentElement.dataset.theme=t;}catch(e){}</script>
+<script></script>
 <script>
 /* ---------- Ilustrações ---------- */
 const S = (vb, body, sw=2.4) => `<svg viewBox="${vb}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
@@ -475,7 +511,7 @@ const CAP_Q = { dadhat:"boné dad hat aba curva", snapback:"boné snapback aba r
 const GL_Q = { wayfarer:"óculos wayfarer", aviador:"óculos aviador", redondo:"óculos redondo", retangular:"óculos retangular", gatinho:"óculos gatinho", browline:"óculos clubmaster browline", oversized:"óculos quadrado grande", geometrico:"óculos hexagonal", oval:"óculos oval", semAro:"óculos sem aro" };
 </script>
 <script type="module">
-const ART={"barroco": [["https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Georges_de_La_Tour_025.jpg/1280px-Georges_de_La_Tour_025.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Georges_de_La_Tour_025.jpg/960px-Georges_de_La_Tour_025.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Georges_de_La_Tour_025.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Falschspieler_Gerard_van_Honthorst.jpg/1280px-Falschspieler_Gerard_van_Honthorst.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Falschspieler_Gerard_van_Honthorst.jpg/960px-Falschspieler_Gerard_van_Honthorst.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Falschspieler_Gerard_van_Honthorst.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/e/e8/The_Cardsharps.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/The_Cardsharps.jpg?width=1280"]], "renascentista": [["https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg/1280px-%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg/960px-%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1280px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/960px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/D%C3%BCrer_Melancholia_I.jpg/1280px-D%C3%BCrer_Melancholia_I.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/D%C3%BCrer_Melancholia_I.jpg/960px-D%C3%BCrer_Melancholia_I.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BCrer_Melancholia_I.jpg?width=1280"]], "gotico": [["https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg?width=1280"]]};
+const ART={"barroco": [["https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Georges_de_La_Tour_025.jpg/1280px-Georges_de_La_Tour_025.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Georges_de_La_Tour_025.jpg/960px-Georges_de_La_Tour_025.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Georges_de_La_Tour_025.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Falschspieler_Gerard_van_Honthorst.jpg/1280px-Falschspieler_Gerard_van_Honthorst.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Falschspieler_Gerard_van_Honthorst.jpg/960px-Falschspieler_Gerard_van_Honthorst.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Falschspieler_Gerard_van_Honthorst.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/e/e8/The_Cardsharps.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/The_Cardsharps.jpg?width=1280"]], "renascentista": [["https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg/1280px-%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg/960px-%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1280px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/960px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/D%C3%BCrer_Melancholia_I.jpg/1280px-D%C3%BCrer_Melancholia_I.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/D%C3%BCrer_Melancholia_I.jpg/960px-D%C3%BCrer_Melancholia_I.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BCrer_Melancholia_I.jpg?width=1280"]], "gotico": [["https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Abtei_im_Eichwald_-_Google_Art_Project.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_The_Cemetery_-_Google_Art_Project.jpg?width=1280"], ["https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg/1280px-Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg/960px-Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg", "https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Der_M%C3%B6nch_am_Meer_-_Google_Art_Project.jpg?width=1280"]], "streetwear": [["https://images.unsplash.com/photo-1589903519741-d95019598685?w=1280&q=80&auto=format&fit=crop", "https://images.unsplash.com/photo-1589903519741-d95019598685?w=960&q=80&auto=format&fit=crop"], ["https://images.unsplash.com/photo-1542529727-24cb357c57d2?w=1280&q=80&auto=format&fit=crop", "https://images.unsplash.com/photo-1542529727-24cb357c57d2?w=960&q=80&auto=format&fit=crop"], ["https://images.unsplash.com/photo-1707300787601-596f90f64121?w=1280&q=80&auto=format&fit=crop", "https://images.unsplash.com/photo-1707300787601-596f90f64121?w=960&q=80&auto=format&fit=crop"]]};
 const ART_OK={};
 function tryImg(u){ return new Promise((ok,ko)=>{ const i=new Image(); i.decoding="async"; i.onload=()=>ok(u); i.onerror=()=>ko(); i.src=u; setTimeout(ko,15000); }); }
 async function firstOk(list){ for(const u of list){ try{ return await tryImg(u); }catch(e){} } return null; }
@@ -487,18 +523,14 @@ function applyArt(theme){
   });
 }
 /* ---------- Temas ---------- */
-const THEMES=[
-  {k:"barroco",n:"Barroco",d:"La Tour, Honthorst e Caravaggio",c:["#0d0a07","#C9A15A","#6E1B1B"]},
-  {k:"renascentista",n:"Renascentista",d:"Rafael, Botticelli e Dürer",c:["#EFE6D2","#1F4E8C","#9E3B22"]},
-  {k:"gotico",n:"Gótico",d:"Caspar David Friedrich",c:["#0b0a0e","#B32D35","#E4DFD4"]}
-];
+const THEMES=[{k:"renascentista",n:"Renascentista",d:"Rafael, Botticelli e Dürer",c:["#EFE6D2","#1F4E8C","#9E3B22"]}];
 function th(){ const cs=getComputedStyle(document.documentElement), v=n=>cs.getPropertyValue(n).trim();
   return { bg:v("--breu"), bg2:v("--breu-2"), txt:v("--osso"), txt2:v("--osso-2"), acc:v("--ouro"), acc2:v("--ouro-2"), badge:v("--vinho"), font:v("--bl"), dark: v("--breu").toLowerCase()<"#5" }; }
 let TH=th();
 const BGK=t=>"provador.bg."+t;
 function userBg(t){ try{ return localStorage.getItem(BGK(t)); }catch(e){ return null; } }
 function applyTheme(t){
-  const r=document.documentElement; if(t) r.dataset.theme=t; if(!THEMES.some(x=>x.k===r.dataset.theme)) r.dataset.theme="barroco";
+  const r=document.documentElement; if(t) r.dataset.theme=t; r.dataset.theme="renascentista";
   try{ localStorage.setItem("provador.theme",r.dataset.theme); }catch(e){}
   const own=userBg(r.dataset.theme);
   if(own) ["--p1","--p2","--p3"].forEach(p=>r.style.setProperty(p,`url(${own})`)); else applyArt(r.dataset.theme);
@@ -506,7 +538,7 @@ function applyTheme(t){
   const prog=document.getElementById("prog"); if(prog) prog.setAttribute("stroke",TH.acc);
 }
 const CK='<svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>';
-const TFONT={barroco:"&quot;Bodoni Moda&quot;;font-style:italic;font-weight:600",renascentista:'Cinzel;font-weight:600;text-transform:uppercase;font-size:19px',gotico:'UnifrakturMaguntia;font-size:26px'};
+const TFONT={barroco:"&quot;Bodoni Moda&quot;;font-style:italic;font-weight:600",renascentista:'Cinzel;font-weight:600;text-transform:uppercase;font-size:19px',gotico:'UnifrakturMaguntia;font-size:26px',streetwear:"&quot;Saira Extra Condensed&quot;;font-weight:800;text-transform:uppercase;font-size:24px"};
 function paintThemeMenu(){
   const r=document.documentElement, cur=r.dataset.theme;
   document.getElementById("tgrid").innerHTML=THEMES.map(t=>`<button class="trow ${cur===t.k?"on":""}" data-t="${t.k}" aria-pressed="${cur===t.k}"><span class="dot" style="background:conic-gradient(${t.c[0]} 0 50%,${t.c[1]} 50% 80%,${t.c[2]} 80%)"></span><span style="flex:1"><b style="font-family:${TFONT[t.k]};display:block">${t.n}</b><small class="small" style="display:block;font-weight:400">${t.d}</small></span>${CK}</button>`).join("");
@@ -577,7 +609,7 @@ function measure(lm, w, h){
     return Math.acos((v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))*180/Math.PI; };
   const C=dx(P.macaE,P.macaD);
   return { L:dy(P.topo,P.queixo)/C, F:dx(P.testaE,P.testaD)/C, J:dx(P.mandE,P.mandD)/C, Q:dx(P.queixoE,P.queixoD)/C,
-    A:(ang(P.mandE,P.mandSupE,P.mandInfE)+ang(P.mandD,P.mandSupD,P.mandInfD))/2, _C:C, _len:dy(P.topo,P.queixo) };
+    A:(ang(P.mandE,P.mandSupE,P.mandInfE)+ang(P.mandD,P.mandSupD,P.mandInfD))/2, _C:C, _len:dy(P.topo,P.queixo), prof:profileOf(lm,w,h) };
 }
 // Linha do cabelo: sobe a partir do topo da testa até a cor deixar de ser pele
 function hairline(frame, lm, mirrored){
@@ -606,6 +638,67 @@ function hairline(frame, lm, mirrored){
     return { t, L, x:top.x+up.x*t, y:top.y+up.y*t, mx:mirrored };
   }catch(e){ return null; }
 }
+/* ---------- Análise por contorno: perfil de larguras do rosto ---------- */
+// Pontos da borda da malha facial, em ordem (contorno completo do rosto)
+const OVAL_IDX=[10,338,297,332,284,251,389,356,454,323,361,288,397,365,379,378,400,377,152,148,176,149,150,136,172,58,132,93,234,127,162,21,54,103,67,109];
+const PN=25; // larguras medidas da testa (topo da malha) ao queixo
+function profileOf(lm,w,h){
+  const ax=faceAxes(lm,w,h), pts=OVAL_IDX.map(i=>ax.proj(i));
+  const top=ax.proj(10)[1], bot=ax.proj(152)[1], Lm=bot-top; if(!(Lm>0)) return null;
+  const out=[];
+  for(let k=0;k<PN;k++){
+    const y=top+Lm*(0.01+0.98*k/(PN-1)), xs=[];
+    for(let i=0;i<pts.length;i++){ const a=pts[i], b=pts[(i+1)%pts.length];
+      if((a[1]-y)*(b[1]-y)<=0 && a[1]!==b[1]) xs.push(a[0]+(y-a[1])*(b[0]-a[0])/(b[1]-a[1])); }
+    out.push(xs.length>=2 ? (Math.max(...xs)-Math.min(...xs))/Lm : NaN);
+  }
+  return out; // larguras divididas pelo comprimento da malha
+}
+function medianProfile(list){
+  const profs=list.map(m=>m.prof).filter(Boolean); if(!profs.length) return null;
+  return Array.from({length:PN},(_,k)=>{ const v=profs.map(p=>p[k]).filter(Number.isFinite).sort((a,b)=>a-b); return v.length? v[Math.floor(v.length/2)] : NaN; });
+}
+// Perfil completo, da linha do cabelo ao queixo. hr = altura da testa acima da malha / comprimento da malha
+const TS=Array.from({length:20},(_,k)=>(k+0.5)/20);
+function fullProfile(prof,hr){
+  const W=Math.max(...prof.filter(Number.isFinite)), L=1+hr, wTop=prof.find(Number.isFinite);
+  const at=y=>{ const f=(y-0.01)/0.98*(PN-1), i=Math.max(0,Math.min(PN-2,Math.floor(f))), u=Math.min(1,Math.max(0,f-i));
+    const a=prof[i], b=prof[i+1]; return Number.isFinite(a)&&Number.isFinite(b) ? a+(b-a)*u : (Number.isFinite(a)?a:b); };
+  const w=TS.map(t=>{ const y=t*L-hr; if(y<0){ const s=hr>0?(-y/hr):0; return wTop*(1-0.38*s*s); } return at(Math.min(1,y)); });
+  return { A:L/W, w:w.map(x=>x/W) };
+}
+// Formatos de referência (definições usuais de visagismo), da linha do cabelo (t=0) ao queixo (t=1)
+const sq=(x)=>Math.sqrt(Math.max(0,x));
+const TPL_FN={
+  oval:      { A:1.40, f:t=> t<0.45 ? sq(1-((0.45-t)/0.62)**2) : sq(1-((t-0.45)/0.60)**2) },
+  redondo:   { A:1.16, f:t=> sq(1-((t-0.5)/0.56)**2) },
+  quadrado:  { A:1.20, f:t=> Math.max(0,1-Math.abs((t-0.5)/0.56)**4)**0.25 },
+  retangular:{ A:1.55, f:t=> Math.max(0,1-Math.abs((t-0.5)/0.56)**4)**0.25 },
+  coracao:   { A:1.32, f:t=> t<0.3 ? sq(1-((0.3-t)/0.42)**2) : Math.max(0.08,1-((t-0.3)/0.76)**1.15) },
+  diamante:  { A:1.38, f:t=> t<0.45 ? Math.max(0.3,1-((0.45-t)/0.62)**1.6) : Math.max(0.1,1-((t-0.45)/0.6)**1.3) },
+  triangular:{ A:1.28, f:t=> t<0.72 ? 0.74+0.26*(t/0.72)**1.3 : sq(1-((t-0.72)/0.32)**2) }
+};
+const TPL={}; for(const k in TPL_FN){ const w=TS.map(TPL_FN[k].f), M=Math.max(...w); TPL[k]={ A:TPL_FN[k].A, w:w.map(x=>x/M) }; }
+function classifyProfile(prof,hr){
+  const fp=fullProfile(prof,hr);
+  const sc=Object.entries(TPL).map(([k,t])=>{
+    let dw=0, ws=0; fp.w.forEach((v,i)=>{ const wt = (TS[i]<0.1||TS[i]>0.9)?0.4:1; if(Number.isFinite(v)){ dw+=wt*((v-t.w[i])/0.07)**2; ws+=wt; } });
+    const d = dw/ws + ((fp.A-t.A)/0.08)**2;
+    return [k,Math.exp(-d/2)];
+  });
+  const tot=sc.reduce((s,x)=>s+x[1],0)||1;
+  return { fp, probs: sc.map(([k,v])=>({k,p:v/tot})).sort((a,b)=>b.p-a.p) };
+}
+// Mede no perfil completo: testa (15%), maçãs (máx.), mandíbula (75%), proporção comprimento/largura
+function profileMeasures(fp){ const pick=t=>fp.w[Math.round(t*20-0.5)]; return { F:pick(0.15), J:pick(0.75), L:fp.A }; }
+// Desenho: seu contorno (linha) sobre o formato de referência (área)
+function silhouetteSVG(fp,key,acc,txt){
+  const H=130, W=H/ (TPL[key].A), pathOf=(w,A)=>{ const h=H, scale=(H/A)/2; const left=[],right=[];
+    TS.forEach((t,i)=>{ const y=5+t*h, x=w[i]*scale; left.push([60-x,y]); right.push([60+x,y]); });
+    const pts=[[60,5],...right,[60,5+h],...left.reverse()]; return "M"+pts.map(p=>p[0].toFixed(1)+" "+p[1].toFixed(1)).join("L")+"Z"; };
+  return `<svg viewBox="0 0 120 140" aria-hidden="true"><path d="${pathOf(TPL[key].w,TPL[key].A)}" fill="${acc}" fill-opacity=".18" stroke="${acc}" stroke-width="1.2" stroke-dasharray="3 3"/><path d="${pathOf(fp.w,fp.A)}" fill="none" stroke="${txt}" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+}
+
 // Média aparada: descarta 20% dos extremos para tirar tremidas e piscadas
 function robust(list){
   const out = {}, spread = {};
@@ -833,7 +926,7 @@ function drawScan(canvas, frame, lm, mirrored, t, lines=true, hl=null){
   const c=cropFace(frame,lm,mirrored), out=560; canvas.width=Math.round(out*0.78); canvas.height=out;
   const k=canvas.height/c.sh, g=canvas.getContext("2d");
   g.drawImage(frame,c.sx,c.sy,c.sw,c.sh,0,0,canvas.width,canvas.height);
-  if(!lines) return;
+  if(!lines){ if(hl){ const y=(hl.y-c.sy)*k, x=(hl.x-c.sx)*k; g.strokeStyle="#FF7A1A"; g.lineWidth=4; g.setLineDash([10,6]); g.beginPath(); g.moveTo(0,y); g.lineTo(canvas.width,y); g.stroke(); g.setLineDash([]); } return; }
   const pt=i=>({ x:((mirrored?1-lm[i].x:lm[i].x)*frame.width-c.sx)*k, y:(lm[i].y*frame.height-c.sy)*k });
   g.fillStyle="rgba(247,248,244,.75)";
   const n=Math.floor(lm.length*Math.min(1,t*1.6));
@@ -856,22 +949,25 @@ function analyze(frame, lm, list, mirrored){
     drawScan(cv,frame,lm,mirrored,t,true,hlDraw); $("scanTxt").textContent=txts[Math.min(2,Math.floor(t*3))];
     if(t<1) return requestAnimationFrame(step);
     setTimeout(()=>{
-      const hl=hairline(frame,lm,mirrored);
-      if(hl){ const base=list.length?list:[measure(lm,frame.width,frame.height)];
-        const lenPx=Math.hypot((lm[10].x-lm[152].x)*frame.width,(lm[10].y-lm[152].y)*frame.height);
-        const ratio=(lenPx+hl.t)/lenPx; base.forEach(m=>m.H=m.L*ratio); list=base; }
-      const R=robust(list), pr=probs(R.m);
+      if(!list.length) list=[measure(lm,frame.width,frame.height)];
+      const lenPx=Math.hypot((lm[10].x-lm[152].x)*frame.width,(lm[10].y-lm[152].y)*frame.height);
+      const hrAuto = hlDraw ? Math.min(0.42, Math.max(0.04, hlDraw.t/lenPx)) : null;
+      const hr = hrAuto ?? 0.14;
+      const prof=medianProfile(list), R=robust(list);
+      const cls=classifyProfile(prof,hr), pm=profileMeasures(cls.fp);
       const photo=document.createElement("canvas"); drawScan(photo,frame,lm,mirrored,1,true,hlDraw);
       const clean=document.createElement("canvas"); drawScan(clean,frame,lm,mirrored,1,false);
-      const quality = (R.n>=40 && R.spread.L<0.03 ? "alta" : R.n>=12 ? "boa" : "básica (foto única)") + (Number.isFinite(R.m.H) ? " · com linha do cabelo" : "");
-      const res={ t:Date.now(), shape:pr[0].k, probs:pr.slice(0,4), m:R.m, n:R.n, quality,
+      const quality = (R.n>=40 ? "alta" : R.n>=12 ? "boa" : "básica (foto única)") + (hrAuto!=null ? ", linha do cabelo detectada" : ", linha do cabelo estimada");
+      const res={ t:Date.now(), shape:cls.probs[0].k, probs:cls.probs.slice(0,4), m:{...pm, A:R.m.A}, n:R.n, quality, prof, hr, hrAuto,
         photo:photo.toDataURL("image/jpeg",.85), clean:clean.toDataURL("image/jpeg",.85) };
+      LIVE={ frame, lm, mirrored, res };
       scan.hidden=true; document.body.style.overflow="";
       saveHist(res); render(res);
     },300);
   })(performance.now());
 }
 
+let LIVE=null;
 /* ---------- Histórico ---------- */
 const HK="provador.hist.v1";
 function loadHist(){ try{ return JSON.parse(localStorage.getItem(HK))||[]; }catch(e){ return []; } }
@@ -932,16 +1028,22 @@ function render(r, shapeOverride){
   <div class="alts"><span>Não parece certo?</span>${r.probs.map(x=>`<button data-shape="${x.k}" class="${x.k===key?"on":""}">${SHAPES[x.k].nome} ${pct(x.p)}%</button>`).join("")}</div>
   <div class="why">
     <p>${s.resumo}</p>
-    <div class="why-grid">${faceSVG(key)}
+    <div class="why-grid">${r.prof? silhouetteSVG(fullProfile(r.prof,r.hr),key,TH.acc,TH.txt) : faceSVG(key)}
       <div class="meas" aria-label="Medidas em relação à largura das maçãs do rosto">
         ${bar("Testa",m.F,1.1,TH.txt,pct(m.F)+"%")}
         ${bar("Maçãs",1,1.1,TH.acc,"100%")}
         ${bar("Mandíbula",m.J,1.1,TH.txt2,pct(m.J)+"%")}
-        ${Number.isFinite(m.H)?bar("Compr. real",m.H,1.9,TH.txt,m.H.toFixed(2).replace(".",",")+"×"):bar("Comprimento",m.L,1.8,TH.txt,m.L.toFixed(2).replace(".",",")+"×")}
+        ${bar("Proporção",m.L,1.8,TH.txt,m.L.toFixed(2).replace(".",",")+"×")}
         ${Number.isFinite(m.A)?bar("Ângulo mandíb.",180-m.A,70,TH.txt2,Math.round(m.A)+"°"):""}
       </div>
     </div>
-    <p class="small" style="margin-top:10px">Larguras comparadas às maçãs do rosto. Ângulo menor = mandíbula mais marcada.</p>
+    <p class="small" style="margin-top:10px">Linha cheia: o contorno do seu rosto. Área tracejada: o formato ${s.nome.toLowerCase()} de referência. Larguras comparadas à parte mais larga do rosto.</p>
+    ${r.prof?`<div class="hlfix">
+      ${LIVE&&LIVE.res===r?'<canvas id="hlCanvas"></canvas>':''}
+      <div><label for="hlRange"><b>Linha do cabelo</b> ${r.hrAuto!=null?"(detectada automaticamente)":"(estimada: ajuste para mais precisão)"}</label>
+      <input type="range" id="hlRange" min="2" max="42" value="${Math.round(r.hr*100)}" aria-describedby="hlHelp">
+      <p class="small" id="hlHelp">${LIVE&&LIVE.res===r?"Arraste até a linha laranja ficar onde começa o seu cabelo, ou onde começaria se você tiver entradas ou cabelo raspado.":"Mova para a direita se a sua testa for mais alta, para a esquerda se for mais baixa."} O resultado se atualiza na hora.</p></div>
+    </div>`:''}
   </div>
   <div class="tabs" role="tablist">
     <button role="tab" data-tab="caps" aria-selected="${tab==="caps"}">Bonés</button>
@@ -964,6 +1066,16 @@ function render(r, shapeOverride){
   $("result").querySelectorAll(".try").forEach(b=>b.addEventListener("click",()=>openTry(b.dataset.kind, b.dataset.key)));
   $("restart").addEventListener("click",()=>{ $("result").hidden=true; $("actionbar").hidden=true; $("intro").hidden=false; scrollTo({top:0}); openCamera(); });
   current.shown=key;
+  const rg=$("hlRange");
+  if(rg){
+    const drawHL=()=>{ const cv=$("hlCanvas"); if(!cv||!LIVE||LIVE.res!==r) return; const {frame,lm,mirrored}=LIVE;
+      const W=frame.width,H=frame.height, p=i=>({x:(mirrored?1-lm[i].x:lm[i].x)*W,y:lm[i].y*H}), T=p(10), Cn=p(152), L=Math.hypot(T.x-Cn.x,T.y-Cn.y), up={x:(T.x-Cn.x)/L,y:(T.y-Cn.y)/L};
+      drawScan(cv,frame,lm,mirrored,1,false,{x:T.x+up.x*r.hr*L, y:T.y+up.y*r.hr*L}); };
+    drawHL();
+    let tm; rg.addEventListener("input",()=>{ r.hr=rg.value/100; r.hrAuto=r.hrAuto; drawHL(); clearTimeout(tm); tm=setTimeout(()=>{
+      const cls=classifyProfile(r.prof,r.hr), pm=profileMeasures(cls.fp); r.probs=cls.probs.slice(0,4); r.shape=cls.probs[0].k; r.m={...pm,A:r.m.A};
+      const y=scrollY; render(r); scrollTo(0,y); },180); });
+  }
 }
 $("barTry").addEventListener("click",()=>openTry());
 $("barShare").addEventListener("click",()=>shareCard());
