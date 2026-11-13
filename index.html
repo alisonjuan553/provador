@@ -211,6 +211,19 @@ section.cat>p{margin:6px 0 18px;max-width:56ch}
 .fav-item b{font-size:15px}
 .fav-item a{font:800 12px/1 Archivo,"Arial Narrow",sans-serif;text-transform:uppercase;color:#000;text-decoration:underline;text-underline-offset:3px}
 .fav-item button{padding:10px 12px;font-size:12px;box-shadow:2px 2px 0 var(--laranja)}
+
+.adj{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:8px;width:100%}
+.adj span{font:800 11px/1 Archivo,"Arial Narrow",sans-serif;font-stretch:115%;text-transform:uppercase;color:#fff;margin-right:2px}
+.adj button{min-width:38px;padding:9px 10px;font-size:15px;background:transparent;color:#fff;border-color:#fff;box-shadow:none}
+.extra{flex-wrap:wrap}
+
+.match{position:relative;height:22px;border:2px solid #000;background:var(--papel);margin:8px 0 2px;max-width:200px}
+.match i{position:absolute;left:0;top:0;bottom:0;background:var(--laranja)}
+.match span{position:relative;display:block;font:800 11px/18px Archivo,"Arial Narrow",sans-serif;font-stretch:115%;text-transform:uppercase;padding-left:8px;color:#000}
+.sizes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px;padding:14px;background:#000;color:var(--papel);border:2px solid #000;box-shadow:4px 4px 0 var(--laranja)}
+.sizes span{display:block;font:700 10px/1.2 Archivo,"Arial Narrow",sans-serif;font-stretch:115%;text-transform:uppercase;opacity:.75}
+.sizes b{font:900 26px/1.1 Archivo,"Arial Narrow",sans-serif;font-stretch:72%}
+.sizes p{grid-column:1/-1;font-size:13px;opacity:.85;margin-top:4px}
 </style>
 </head>
 <body>
@@ -250,7 +263,7 @@ section.cat>p{margin:6px 0 18px;max-width:56ch}
   </section>
 
   <section id="result" hidden></section>
-  <p class="fine">Tudo é processado no seu aparelho: nenhuma imagem vai para servidores. Preços são faixas de referência de nov/2026 e mudam nas lojas.</p>
+  <p class="fine">Modelo 3D "Óculos realista": Sunglasses Khronos, © 2024 Darmstadt Graphics Group GmbH, por Eric Chadwick, licença CC BY 4.0. Tudo é processado no seu aparelho: nenhuma imagem vai para servidores. Preços são faixas de referência de nov/2026 e mudam nas lojas.</p>
   <p class="credits">Obras em domínio público, via Wikimedia Commons: <i>A Escola de Atenas</i>, Rafael; <i>O Nascimento de Vênus</i>, Botticelli; <i>Melencolia I</i>, Albrecht Dürer.</p>
 </main>
 
@@ -453,6 +466,7 @@ const BRAND = {
 const CAP_Q = { dadhat:"boné dad hat aba curva", snapback:"boné snapback aba reta", trucker:"boné trucker tela", fitted:"boné fitted aba reta fechado", fivepanel:"boné five panel", bucket:"bucket hat", aframe:"boné a-frame aba curva" };
 const GL_Q = { wayfarer:"óculos wayfarer", aviador:"óculos aviador", redondo:"óculos redondo", retangular:"óculos retangular", gatinho:"óculos gatinho", browline:"óculos clubmaster browline", oversized:"óculos quadrado grande", geometrico:"óculos hexagonal", oval:"óculos oval", semAro:"óculos sem aro", esportivo:"óculos esportivo envolvente" };
 </script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <script type="module">
 const ART={};
 const ART_OK={};
@@ -552,7 +566,9 @@ function measure(lm, w, h){
     return Math.acos((v1[0]*v2[0]+v1[1]*v2[1])/(Math.hypot(...v1)*Math.hypot(...v2)))*180/Math.PI; };
   const C=dx(P.macaE,P.macaD);
   return { L:dy(P.topo,P.queixo)/C, F:dx(P.testaE,P.testaD)/C, J:dx(P.mandE,P.mandD)/C, Q:dx(P.queixoE,P.queixoD)/C,
-    A:(ang(P.mandE,P.mandSupE,P.mandInfE)+ang(P.mandD,P.mandSupD,P.mandInfD))/2, _C:C, _len:dy(P.topo,P.queixo), prof:profileOf(lm,w,h) };
+    A:(ang(P.mandE,P.mandSupE,P.mandInfE)+ang(P.mandD,P.mandSupD,P.mandInfD))/2, _C:C, _len:dy(P.topo,P.queixo), prof:profileOf(lm,w,h),
+    ...(lm.length>=478 ? (()=>{ const d2=(a,b)=>{ const A=p(a),B=p(b); return Math.hypot(A[0]-B[0],A[1]-B[1]); };
+      return { I:((d2(469,471)+d2(474,476))/2)/C, D:d2(468,473)/C }; })() : {}) };
 }
 // Linha do cabelo: sobe a partir do topo da testa até a cor deixar de ser pele
 function hairline(frame, lm, mirrored){
@@ -645,7 +661,7 @@ function silhouetteSVG(fp,key,acc,txt){
 // Média aparada: descarta 20% dos extremos para tirar tremidas e piscadas
 function robust(list){
   const out = {}, spread = {};
-  for(const k of ["L","F","J","Q","A","H"]){
+  for(const k of ["L","F","J","Q","A","H","I","D"]){
     const v = list.map(m=>m[k]).filter(Number.isFinite).sort((a,b)=>a-b);
     const cut = Math.floor(v.length*0.2), core = v.slice(cut, v.length-cut || undefined);
     const arr = core.length ? core : v;
@@ -911,7 +927,7 @@ function analyze(frame, lm, list, mirrored){
       const photo=document.createElement("canvas"); drawScan(photo,frame,lm,mirrored,1,true,hlDraw);
       const clean=document.createElement("canvas"); drawScan(clean,frame,lm,mirrored,1,false);
       const quality = (combined ? `muito alta, ${combined} leituras combinadas` : R.n>=40 ? "alta" : R.n>=12 ? "boa" : "básica (foto única)") + (hrAuto!=null ? ", linha do cabelo detectada" : ", linha do cabelo estimada");
-      const res={ t:Date.now(), shape:cls.probs[0].k, probs:cls.probs.slice(0,4), m:{...pm, A:R.m.A}, n:R.n, quality, prof, hr, hrAuto, combined,
+      const res={ t:Date.now(), shape:cls.probs[0].k, probs:cls.probs.slice(0,4), m:{...pm, A:R.m.A, I:R.m.I, D:R.m.D}, n:R.n, quality, prof, hr, hrAuto, combined,
         photo:photo.toDataURL("image/jpeg",.85), clean:clean.toDataURL("image/jpeg",.85) };
       LIVE={ frame, lm, mirrored, res };
       scan.hidden=true; document.body.style.overflow="";
@@ -921,6 +937,65 @@ function analyze(frame, lm, list, mirrored){
 }
 
 let LIVE=null, REFINE=null;
+/* ---------- Indicação personalizada: características de cada modelo x medidas do rosto ---------- */
+// ang: 0 = curvo, 1 = reto/anguloso | h: altura da lente (0 baixa, 1 alta) | top: peso visual em cima (0 leve, 1 marcado)
+const GL_ATTR={ wayfarer:{ang:.75,h:.5,top:.75}, aviador:{ang:.35,h:.75,top:.3}, redondo:{ang:0,h:.6,top:.4}, retangular:{ang:.9,h:.25,top:.5},
+  gatinho:{ang:.6,h:.45,top:.95}, browline:{ang:.6,h:.45,top:1}, oversized:{ang:.6,h:1,top:.55}, geometrico:{ang:.7,h:.55,top:.5},
+  oval:{ang:.15,h:.4,top:.45}, semAro:{ang:.4,h:.45,top:.15}, esportivo:{ang:.45,h:.55,top:.6} };
+// crown: altura da copa | struct: estruturado (1) ou mole (0) | curve: aba curva (1) ou reta (0)
+const CAP_ATTR={ snapback:{crown:.85,struct:1,curve:0}, fitted:{crown:.95,struct:1,curve:0}, trucker:{crown:.85,struct:.8,curve:.6}, aframe:{crown:.9,struct:1,curve:.7},
+  dadhat:{crown:.2,struct:.1,curve:.9}, fivepanel:{crown:.45,struct:.4,curve:.1}, bucket:{crown:.35,struct:.2,curve:.5} };
+const clamp01=x=>Math.max(0,Math.min(1,x));
+function userTraits(r){
+  if(!r.prof) return null;
+  const fp=fullProfile(r.prof,r.hr), m=r.m||{};
+  const lower=fp.w.filter((_,i)=>TS[i]>=0.55&&TS[i]<=0.9), fill=lower.reduce((a,b)=>a+b,0)/lower.length;
+  const angF=clamp01((fill-0.86)/0.12), angJ=Number.isFinite(m.A)?clamp01((150-m.A)/25):angF;
+  const F=fp.w[Math.round(0.15*20-0.5)], J=fp.w[Math.round(0.75*20-0.5)];
+  return { ang:0.65*angF+0.35*angJ, long:clamp01((fp.A-1.2)/0.35), topNeed:clamp01(0.5+(J-F)*2.5), F, J, A:fp.A };
+}
+function scoreItem(kind,key,u){
+  if(kind==="gl"){ const a=GL_ATTR[key]; if(!a) return 0;
+    const d=0.9*(a.ang-(1-u.ang))**2 + 0.8*(a.h-u.long)**2 + 1.3*(a.top-u.topNeed)**2; return Math.exp(-1.8*d); }
+  const a=CAP_ATTR[key]; if(!a) return 0;
+  const crownD=clamp01(0.95-0.8*u.long-0.45*u.ang+(u.topNeed-0.5)*0.6), d=1.2*(a.crown-crownD)**2 + 0.8*(a.struct-(1-u.ang))**2 + 0.6*(a.curve-u.ang)**2; return Math.exp(-1.8*d);
+}
+function reasonFor(kind,key,u,good){
+  const R=[];
+  if(kind==="gl"){ const a=GL_ATTR[key];
+    if(a.ang>=.6 && u.ang<.45) R.push([good,"Linhas retas contrastam com o contorno suave do seu rosto."]);
+    if(a.ang<=.35 && u.ang>=.55) R.push([good,"Curvas suavizam a sua mandíbula marcada."]);
+    if(a.ang>=.6 && u.ang>=.55) R.push([!good,"Repete os ângulos da sua mandíbula e endurece o rosto."]);
+    if(a.ang<=.35 && u.ang<.45) R.push([!good,"Curvas demais somam ao contorno já arredondado."]);
+    if(a.h>=.7 && u.long>=.55) R.push([good,"Lentes altas ocupam espaço e encurtam o rosto comprido."]);
+    if(a.h<=.3 && u.long>=.55) R.push([!good,"Lente baixa e estreita alonga ainda mais o rosto."]);
+    if(a.h<=.45 && u.long<.35) R.push([good,"Lente mais baixa não deixa o rosto curto ainda menor."]);
+    if(a.top>=.8 && u.topNeed>=.6) R.push([good,"Peso na parte de cima equilibra a sua mandíbula larga."]);
+    if(a.top>=.8 && u.topNeed<=.4) R.push([!good,"Peso em cima soma à testa, que já é a parte mais larga."]);
+    if(a.top<=.35 && u.topNeed<=.4) R.push([good,"Armação leve em cima não pesa na sua testa larga."]);
+  } else { const a=CAP_ATTR[key];
+    if(a.crown>=.8 && u.long<.4) R.push([good,"Copa alta dá altura ao rosto curto."]);
+    if(a.crown>=.8 && u.long>=.6) R.push([!good,"Copa alta alonga ainda mais o rosto comprido."]);
+    if(a.crown<=.45 && u.long>=.55) R.push([good,"Copa baixa encurta visualmente o rosto comprido."]);
+    if(a.crown<=.45 && u.long<.35) R.push([!good,"Copa baixa achata o rosto curto."]);
+    if(a.struct>=.8 && u.ang<.45) R.push([good,"Frente estruturada cria linhas retas no seu rosto arredondado."]);
+    if(a.struct<=.3 && u.ang>=.55) R.push([good,"Copa macia e aba curva suavizam os ângulos do seu rosto."]);
+    if(a.curve<=.1 && u.ang>=.6) R.push([!good,"Aba reta repete a linha marcada da sua mandíbula."]);
+    if(a.crown>=.8 && u.topNeed>=.6) R.push([good,"Volume em cima equilibra a mandíbula larga."]);
+  }
+  const hit=R.find(x=>x[0]); return hit ? hit[1] : (good ? "Proporções que combinam com as medidas do seu rosto." : "Pouco alinhado com as proporções do seu rosto.");
+}
+function rankFor(kind,u){
+  const keys=Object.keys(kind==="gl"?GL_ATTR:CAP_ATTR);
+  return keys.map(k=>({k, p:scoreItem(kind,k,u)})).sort((a,b)=>b.p-a.p);
+}
+// Medidas em milímetros usando a íris como régua (diâmetro médio da íris adulta: 11,7 mm)
+function sizesFor(m){
+  if(!Number.isFinite(m.I) || !(m.I>0.04 && m.I<0.12)) return null;
+  const face=11.7/m.I, pd=Number.isFinite(m.D)? m.D*face : null, frame=Math.round(face*0.97), lens=Math.round((frame-18-12)/2);
+  return { face:Math.round(face), pd: pd?Math.round(pd):null, frame, lens };
+}
+
 /* ---------- Histórico ---------- */
 const HK="provador.hist.v1";
 function loadHist(){ try{ return JSON.parse(localStorage.getItem(HK))||[]; }catch(e){ return []; } }
@@ -956,12 +1031,12 @@ function paintFavs(){ const f=favs(), box=$("favs"); if(!box) return; box.hidden
   $("favList").innerHTML=f.map(({kind,key})=>{ const it=kind==="cap"?CAPS[key]:GLASSES[key]; if(!it) return ""; const q=kind==="cap"?CAP_Q[key]:GL_Q[key];
     return `<div class="fav-item">${it.svg}<b>${it.n.replace(/ \(.*\)/,"")}</b><a href="${ml(q)}" target="_blank" rel="noopener">Comprar</a><button data-kind="${kind}" data-key="${key}">Provar</button></div>`; }).join("");
   $("favList").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>openTry(b.dataset.kind,b.dataset.key))); }
-function pickCard(kind, key, top, i=0){
+function pickCard(kind, key, top, i=0, pct=null, reason=null){
   const item = kind==="cap" ? CAPS[key] : GLASSES[key];
   const pr = kind==="cap" ? CAP_PRICE[key] : (GL_PRICE[key]||GL_PRICE._);
   const q = kind==="cap" ? CAP_Q[key] : GL_Q[key];
   return `<article class="pick${top?" top":""}"><span class="rank" aria-hidden="true">${String(i+1).padStart(2,"0")}</span>
-    <div class="head">${item.svg}<div>${top?'<div class="tag">Melhor escolha</div>':""}<h3>${item.n}</h3><p class="desc">${item.d}</p></div></div>
+    <div class="head">${item.svg}<div>${top?'<div class="tag">Melhor escolha</div>':""}<h3>${item.n}</h3>${pct!=null?`<div class="match"><i style="width:${pct}%"></i><span>Combina ${pct}%</span></div>`:""}<p class="desc">${reason||item.d}</p></div></div>
     <div class="price"><div>Modelo básico<b>${pr[0]}</b></div><div>De marca<b>${pr[1]}</b></div></div>
     ${(BRAND[key]||[]).map(b=>`<div class="brand"><div><span>Referência de marca</span><b>${b.n}</b></div><strong>${b.p}</strong><a href="${ml(b.q)}" target="_blank" rel="noopener">Ver</a></div>`).join("")}
     <div class="buy">
@@ -976,6 +1051,13 @@ function pickCard(kind, key, top, i=0){
 function render(r, shapeOverride){
   current=r;
   const key=shapeOverride||r.shape, s=SHAPES[key], m=r.m;
+  const u = shapeOverride ? null : userTraits(r);
+  const capRank = u ? rankFor("cap",u) : null, glRank = u ? rankFor("gl",u) : null;
+  const capList = capRank ? capRank.slice(0,3).map(x=>x.k) : s.caps, glList = glRank ? glRank.slice(0,4).map(x=>x.k) : s.glasses;
+  const pctOf=(rank,k)=> rank ? Math.round(100*rank.find(x=>x.k===k).p) : null;
+  const why=(kind,k,good)=> u ? reasonFor(kind,k,u,good) : null;
+  const worstCap = capRank ? capRank[capRank.length-1].k : null, worstGl = glRank ? glRank[glRank.length-1].k : null;
+  const sz = sizesFor(m||{});
   const top=r.probs.find(x=>x.k===key)||{p:0};
   const tab = $("result").dataset.tab || "caps";
   $("result").innerHTML=`
@@ -984,7 +1066,7 @@ function render(r, shapeOverride){
     <div><div class="k">${shapeOverride?"Formato escolhido por você":"Seu rosto é"}</div>
       <div class="shape-name">${s.nome}</div>
       ${(()=>{ const sec=r.probs.find(x=>x.k!==key); return (!shapeOverride && top.p<0.5 && sec && sec.p>=0.2) ? `<div class="k" style="margin-bottom:8px">Com traços de ${SHAPES[sec.k].nome.toLowerCase()}</div>` : ""; })()}
-      <div class="best"><span>Boné</span><b>${CAPS[s.caps[0]].n.replace(/ \(.*\)/,"")}</b><span>Óculos</span><b>${GLASSES[s.glasses[0]].n}</b></div>
+      <div class="best"><span>Boné</span><b>${CAPS[capList[0]].n.replace(/ \(.*\)/,"")}</b><span>Óculos</span><b>${GLASSES[glList[0]].n}</b></div>
       <div class="cert"><span class="track"><i style="width:${pct(top.p)}%"></i></span>${pct(top.p)}% de certeza</div>
       <div class="k" style="margin-top:6px">Qualidade da leitura: ${r.quality}${r.n>1?` · ${r.n} medições`:""}</div>
     </div>
@@ -1014,11 +1096,13 @@ function render(r, shapeOverride){
     <button role="tab" data-tab="gl" aria-selected="${tab==="gl"}">Óculos</button>
   </div>
   <section class="cat" ${tab==="caps"?"":"hidden"} id="secCaps"><p>${s.capTxt}</p>
-    <div class="picks">${s.caps.map((c,i)=>pickCard("cap",c,i===0,i)).join("")}</div>
-    <p class="avoid"><strong>Evite:</strong> ${s.capEvitar}</p></section>
+    <div class="picks">${capList.map((c,i)=>pickCard("cap",c,i===0,i,pctOf(capRank,c),why("cap",c,true))).join("")}</div>
+    <p class="avoid"><strong>Evite:</strong> ${worstCap ? `${CAPS[worstCap].n.replace(/ \(.*\)/,"")} (combina ${pctOf(capRank,worstCap)}%). ${why("cap",worstCap,false)}` : s.capEvitar}</p></section>
   <section class="cat" ${tab==="gl"?"":"hidden"} id="secGl"><p>${s.glassTxt}</p>
-    <div class="picks">${s.glasses.map((g,i)=>pickCard("gl",g,i===0,i)).join("")}</div>
-    <p class="avoid"><strong>Evite:</strong> ${s.glassEvitar}</p></section>
+    ${sz?`<div class="sizes"><div><span>Distância pupilar</span><b>${sz.pd?sz.pd+" mm":"—"}</b></div><div><span>Largura do rosto</span><b>${sz.face} mm</b></div><div><span>Armação ideal</span><b>${sz.frame-4}–${sz.frame+2} mm</b></div><div><span>Lente</span><b>~${sz.lens} mm</b></div>
+      <p>Medido usando a sua íris como régua (margem de cerca de 3 mm). Na loja, procure a largura total da armação e o tamanho da lente, que vem gravado na haste, por exemplo 52□18.</p></div>`:""}
+    <div class="picks">${glList.map((g,i)=>pickCard("gl",g,i===0,i,pctOf(glRank,g),why("gl",g,true))).join("")}</div>
+    <p class="avoid"><strong>Evite:</strong> ${worstGl ? `${GLASSES[worstGl].n} (combina ${pctOf(glRank,worstGl)}%). ${why("gl",worstGl,false)}` : s.glassEvitar}</p></section>
   <p class="pnote">Faixas de preço de referência em lojas brasileiras (nov/2026). Os botões abrem a busca na loja com o preço do dia. O provador mostra o formato do modelo, sem logotipos de marcas.</p>
   <div class="again"><button id="refine">Fazer mais uma leitura para confirmar</button><button class="ghost" id="restart">Nova análise do zero</button></div>`;
   $("result").hidden=false; $("intro").hidden=true; $("actionbar").hidden=false;
@@ -1039,7 +1123,7 @@ function render(r, shapeOverride){
       drawScan(cv,frame,lm,mirrored,1,false,{x:T.x+up.x*r.hr*L, y:T.y+up.y*r.hr*L}); };
     drawHL();
     let tm; rg.addEventListener("input",()=>{ r.hr=rg.value/100; r.hrAuto=r.hrAuto; drawHL(); clearTimeout(tm); tm=setTimeout(()=>{
-      const cls=classifyProfile(r.prof,r.hr), pm=profileMeasures(cls.fp); r.probs=cls.probs.slice(0,4); r.shape=cls.probs[0].k; r.m={...pm,A:r.m.A};
+      const cls=classifyProfile(r.prof,r.hr), pm=profileMeasures(cls.fp); r.probs=cls.probs.slice(0,4); r.shape=cls.probs[0].k; r.m={...pm,A:r.m.A,I:r.m.I,D:r.m.D};
       const y=scrollY; render(r); scrollTo(0,y); },180); });
   }
 }
@@ -1060,12 +1144,47 @@ function recList(kind){
   const all = Object.keys(kind==="caps"?CAPS:GLASSES);
   return [...rec, ...all.filter(k=>!rec.includes(k))].map(k=>({k, rec:rec.includes(k)}));
 }
+/* Modelos 3D reais (glTF). O de óculos é um modelo de e-commerce com licença livre (CC BY 4.0). */
+const REAL={
+  gl:{ "real:khronos":{ n:"Óculos realista", urls:["https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Assets@main/Models/SunglassesKhronos/glTF-Binary/SunglassesKhronos.glb","https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/SunglassesKhronos/glTF-Binary/SunglassesKhronos.glb"] } },
+  caps:{}
+};
+const ADJ={ caps:{s:1,y:0,rot:0}, gl:{s:1,y:0,rot:0} };
+const REAL_ICON='<svg viewBox="0 0 76 34"><text x="38" y="23" text-anchor="middle" font-family="Archivo,sans-serif" font-weight="900" font-size="16" fill="currentColor">3D</text></svg>';
+let GLTF=null; const GLB_CACHE={};
+async function loadGLB(src){
+  if(GLB_CACHE[src.key]) return GLB_CACHE[src.key];
+  if(!GLTF){ const m=await import("https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js"); GLTF=new m.GLTFLoader(); }
+  const p=(async()=>{
+    if(src.buffer) return (await GLTF.parseAsync(src.buffer,"")).scene;
+    let err; for(const u of src.urls){ try{ return (await GLTF.loadAsync(u)).scene; }catch(e){ err=e; } } throw err;
+  })();
+  GLB_CACHE[src.key]=p; p.catch(()=>{ delete GLB_CACHE[src.key]; }); return p;
+}
+// Encaixe automático: mede a caixa do modelo e coloca no rosto (unidade = distância entre os olhos)
+function fitModel(scene, kind){
+  const obj=scene.clone(true), box=new T.Box3().setFromObject(obj), size=box.getSize(new T.Vector3()), c=box.getCenter(new T.Vector3());
+  const inner=new T.Group(); inner.add(obj); obj.position.sub(c);
+  if(kind==="gl"){ const k=2.3/size.x; inner.scale.setScalar(k); inner.position.set(0,0.02,0.42-size.z*k/2); }
+  else { const k=2.85/size.x; inner.scale.setScalar(k); inner.position.set(0,0.5+size.y*k/2,-1.36+0.25); }
+  const outer=new T.Group(); outer.add(inner); outer.userData.real=true; return outer;
+}
+function pickRealFile(kind){
+  const inp=document.createElement("input"); inp.type="file"; inp.accept=".glb,model/gltf-binary";
+  inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; const key="user:"+kind+":"+f.name;
+    REAL[kind][key]={ n:f.name.replace(/\.glb$/i,"").slice(0,14), buffer:await f.arrayBuffer() };
+    if(kind==="caps") tryS.cap=key; else tryS.gl=key; ADJ[kind]={s:1,y:0,rot:0}; paintTry(); rebuild3D(); };
+  inp.click();
+}
 function paintTry(){
   const kind=tryS.tab, list=recList(kind), sel = kind==="caps"?tryS.cap:tryS.gl;
   $("segCaps").setAttribute("aria-selected", kind==="caps"); $("segGl").setAttribute("aria-selected", kind==="gl");
   $("rail").innerHTML = `<button data-k="" class="${!sel?"on":""}"><svg viewBox="0 0 40 20"><path d="M12 4l16 12M28 4L12 16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Nenhum</button>` +
-    list.map(({k,rec})=>{ const it=kind==="caps"?CAPS[k]:GLASSES[k]; return `<button data-k="${k}" class="${sel===k?"on":""}">${it.svg}${it.n.replace(/ \(.*\)/,"")}${rec?'<span class="rec">Indicado</span>':""}</button>`; }).join("");
-  $("rail").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ if(kind==="caps") tryS.cap=b.dataset.k||null; else tryS.gl=b.dataset.k||null; paintTry(); rebuild3D(); }));
+    Object.entries(REAL[kind]).map(([k,m])=>`<button data-k="${k}" class="${sel===k?"on":""}">${REAL_ICON}${m.n}<span class="rec">Modelo real</span></button>`).join("") +
+    list.map(({k,rec})=>{ const it=kind==="caps"?CAPS[k]:GLASSES[k]; return `<button data-k="${k}" class="${sel===k?"on":""}">${it.svg}${it.n.replace(/ \(.*\)/,"")}${rec?'<span class="rec">Indicado</span>':""}</button>`; }).join("") +
+    `<button data-load="1"><svg viewBox="0 0 76 34"><path d="M38 6v18M30 16l8 8 8-8M24 28h28" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>Carregar modelo .glb</button>`;
+  $("rail").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ if(b.dataset.load) return pickRealFile(kind);
+    if(kind==="caps") tryS.cap=b.dataset.k||null; else tryS.gl=b.dataset.k||null; paintTry(); rebuild3D(); }));
   const cols = kind==="caps"?CAP_COLORS:GL_COLORS, ci = kind==="caps"?tryS.capC:tryS.glC;
   $("colors").innerHTML = cols.map((c,i)=>`<button aria-label="${c[0]}" title="${c[0]}" class="${i===ci?"on":""}" style="background:${c[1]}"></button>`).join("");
   $("colors").querySelectorAll("button").forEach((b,i)=>b.addEventListener("click",()=>{ if(kind==="caps") tryS.capC=i; else tryS.glC=i; paintTry(); rebuild3D(); }));
@@ -1077,6 +1196,11 @@ function paintTry(){
     ex.innerHTML=`<button data-l="sol" class="${tryS.lens==="sol"?"on":""}">Lente de sol</button><button data-l="grau" class="${tryS.lens==="grau"?"on":""}">Lente de grau</button>`;
     ex.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ tryS.lens=b.dataset.l; paintTry(); rebuild3D(); }));
   }
+  const a=ADJ[kind], adj=document.createElement("div"); adj.className="adj";
+  adj.innerHTML=`<span>Ajuste</span><button data-a="s-" aria-label="Diminuir">−</button><button data-a="s+" aria-label="Aumentar">+</button><button data-a="y+" aria-label="Subir">↑</button><button data-a="y-" aria-label="Descer">↓</button>${String(sel||"").startsWith("user:")||String(sel||"").startsWith("real:")?'<button data-a="r" aria-label="Girar 180 graus">↻</button>':""}<button data-a="0" aria-label="Voltar ao encaixe automático">Auto</button>`;
+  adj.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{ const k=b.dataset.a;
+    if(k==="s-") a.s=Math.max(.7,a.s-.04); if(k==="s+") a.s=Math.min(1.4,a.s+.04); if(k==="y+") a.y+=.05; if(k==="y-") a.y-=.05; if(k==="r") a.rot=a.rot?0:Math.PI; if(k==="0"){ a.s=1; a.y=0; a.rot=0; } }));
+  ex.appendChild(adj);
   const on=$("rail").querySelector(".on"); if(on) on.scrollIntoView({inline:"center",block:"nearest"});
 }
 $("segCaps").addEventListener("click",()=>{ tryS.tab="caps"; paintTry(); });
@@ -1382,11 +1506,16 @@ function buildCap(type, ci){
   return g;
 }
 
+let BUILD_ID=0;
 function rebuild3D(){
-  if(!R3) return;
+  if(!R3) return; const id=++BUILD_ID;
   disposeObj(R3.cap); disposeObj(R3.gl); R3.cap=R3.gl=null;
-  if(tryS.gl){ R3.gl=buildGlasses(tryS.gl,tryS.glC); R3.anchor.add(R3.gl); }
-  if(tryS.cap){ R3.cap=buildCap(tryS.cap,tryS.capC); R3.cap.traverse(o=>{ if(o.isMesh) o.renderOrder = o.material.transparent ? 1 : -2; }); R3.anchor.add(R3.cap); }
+  const realOf=(kind,k)=> k && REAL[kind][k] ? Object.assign({key:k},REAL[kind][k]) : null;
+  const rg=realOf("gl",tryS.gl), rc=realOf("caps",tryS.cap);
+  if(rg){ $("tryHint").textContent="Carregando modelo 3D…"; loadGLB(rg).then(sc=>{ if(id!==BUILD_ID) return; R3.gl=fitModel(sc,"gl"); R3.anchor.add(R3.gl); }).catch(()=>{ $("tryHint").textContent="Não deu para carregar esse modelo 3D."; }); }
+  if(rc){ $("tryHint").textContent="Carregando modelo 3D…"; loadGLB(rc).then(sc=>{ if(id!==BUILD_ID) return; R3.cap=fitModel(sc,"caps"); R3.cap.traverse(o=>{ if(o.isMesh) o.renderOrder=-2; }); R3.anchor.add(R3.cap); }).catch(()=>{ $("tryHint").textContent="Não deu para carregar esse modelo 3D."; }); }
+  if(tryS.gl && !rg){ R3.gl=buildGlasses(tryS.gl,tryS.glC); R3.anchor.add(R3.gl); }
+  if(tryS.cap && !rc){ R3.cap=buildCap(tryS.cap,tryS.capC); R3.cap.traverse(o=>{ if(o.isMesh) o.renderOrder = o.material.transparent ? 1 : -2; }); R3.anchor.add(R3.cap); }
 }
 
 function facePose(lm,W,H){
@@ -1409,6 +1538,11 @@ async function openTry(kind, key){
   try{ tryStream=await startStream($("video2")); }catch(e){ closeTry(); msg(camError(e),true); return; }
   $("tryHint").textContent="Carregando o provador 3D…";
   try{ await Promise.all([loadAI(), init3D()]); }catch(e){ $("tryHint").textContent="O provador não carregou. Verifique a internet."; return; }
+  // modelos colocados no repositório do GitHub ao lado do index.html (bone.glb / oculos.glb) entram sozinhos
+  if(location.protocol.startsWith("http")) for(const [kind,file,name] of [["caps","bone.glb","Meu boné"],["gl","oculos.glb","Meus óculos"]]){
+    const key="repo:"+file; if(REAL[kind][key]) continue;
+    try{ const r=await fetch(file,{method:"HEAD"}); if(r.ok){ REAL[kind][key]={ n:name, urls:[file] }; } }catch(e){} }
+  paintTry();
   rebuild3D(); tryRunning=true; requestAnimationFrame(tryLoop);
 }
 function closeTry(){ tryRunning=false; if(tryStream){ tryStream.getTracks().forEach(t=>t.stop()); tryStream=null; } $("tryUi").hidden=true; document.body.style.overflow=""; }
@@ -1433,8 +1567,8 @@ function tryLoop(){
       a.scale.setScalar(f.s(p.s,now)); a.visible=true;
       // encaixe pela largura real do rosto (maçãs) em relação à distância entre os olhos
       const cw=Math.hypot((lm[234].x-lm[454].x)*W,(lm[234].y-lm[454].y)*H,(lm[234].z-lm[454].z)*W)/p.s, fit=f.r(cw,now);
-      if(R3.cap) R3.cap.scale.setScalar(Math.max(.86,Math.min(1.2,fit/2.3)));
-      if(R3.gl) R3.gl.scale.set(Math.max(.9,Math.min(1.14,fit/2.3)),1,1);
+      if(R3.cap){ R3.cap.scale.setScalar(Math.max(.86,Math.min(1.2,fit/2.3))*ADJ.caps.s); R3.cap.position.y=ADJ.caps.y; R3.cap.rotation.y=ADJ.caps.rot; }
+      if(R3.gl){ const k=Math.max(.9,Math.min(1.14,fit/2.3))*ADJ.gl.s; R3.gl.scale.set(k, R3.gl.userData.real?k:ADJ.gl.s, R3.gl.userData.real?k:ADJ.gl.s); R3.gl.position.y=(R3.gl.userData.real?0:0.02)+ADJ.gl.y; R3.gl.rotation.y=ADJ.gl.rot; }
       // malha do rosto
       if(!R3.faceOcc) R3.faceOcc=buildFaceOcc(lm);
       const F=new T.Vector3(0,0,1).applyQuaternion(a.quaternion); updateFaceOcc(lm,W,H,F,p.s); R3.faceOcc.visible=true;
